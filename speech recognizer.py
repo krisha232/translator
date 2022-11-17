@@ -28,7 +28,17 @@ obox=ttk.Combobox(root,state="readonly",values=language,width="30")
 obox.set("english")
 obox.place(relx=0.98,rely=0.2,anchor=E)
 
-button=Button(root,text="translate",font=("Bahnschrift light",10),bg="#F2CCC3",activebackground="white",fg="black",relief="flat")
+def translate():
+    translator=Translator()
+    try:
+        translated=translator.translate(text=area.get(1.0,END),src=box.get(),dest=obox.get())
+        oarea.delete(1.0,END)
+        orea.insert(END,translated.text())
+    except:
+        print("Try Again")
+            
+
+button=Button(root,text="translate",font=("Bahnschrift light",10),bg="#F2CCC3",activebackground="white",fg="black",relief="flat",command=translate)
 button.place(relx=0.5,rely=0.55,anchor=CENTER)
 
 root.mainloop()
